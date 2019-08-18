@@ -2,6 +2,7 @@ import sys
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from datetime import datetime
 
 
 class Pdf2Excel():
@@ -35,7 +36,14 @@ class Pdf2Excel():
         self.fcd.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.fcd.add_button(Gtk.STOCK_OPEN, Gtk.ResponseType.OK)
         self.fcd.set_default_size(300, 200)
-
+        self.create_filechooser_filter()
+        self.response = self.fcd.run()
+        if self.response == Gtk.ResponseType.OK:
+            log_content = "Selected file path: " + self.fcd.get_filename()
+            self.log_buffer(log_content)
+            self.fcd.destroy()
+        else:
+            self.fcd.destroy()
 
     # added a file filter to the file chooser dialog
     def create_filechooser_filter(self):
@@ -59,9 +67,14 @@ class Pdf2Excel():
         any_filter.add_pattern("*.*")
         any_filter.set_name("所有檔案")
         self.fcd.add_filter(any_filter)
-        
-    # log utility
+
+    # log utility, attach time stamp to log_content
     def log_buffer(self, log_content):
+        datetimeObj = datetime.now()
+        timestamp = str(datetimeObj.year) + "/" + str(datetimeObj.month) + "/" + str(datetimeObj.day) \
+                    + " " + str(datetimeObj.hour) + ":" + str(datetimeObj.minute) + ":" + str(datetimeObj.second) \
+                    + ">>> "
+        log_content = timestamp + log_content
         buffer1 = self.text_buffer
         end_iter = buffer1.get_end_iter()
         buffer1.insert(end_iter, log_content + "\n")
