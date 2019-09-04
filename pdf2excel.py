@@ -3,6 +3,8 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from datetime import datetime
+# import private classes
+import custom_pdf_2_txt
 
 
 class Pdf2Excel():
@@ -25,10 +27,14 @@ class Pdf2Excel():
         print("Quit with cancel")
         Gtk.main_quit()
 
+    # button 'convert file' convert selected .pdf customs data to its Excel file
+    # format
     def on_button_convert_file_clicked(self, widget, data=None):
-        log_content = "Convert File button clicked"
+        log_content = "converting selected file:" + self.file_selected
         self.log_buffer(log_content)
+        custom_pdf_2_txt.pdf_2_txt(self.file_selected)
 
+    # button 'select file' brings up a file chooser dialog
     def on_button_select_file_clicked(self, widget, data=None):
         self.fcd = Gtk.FileChooserDialog(title="選取檔案...",
                    parent=None,
@@ -39,7 +45,8 @@ class Pdf2Excel():
         self.create_filechooser_filter()
         self.response = self.fcd.run()
         if self.response == Gtk.ResponseType.OK:
-            log_content = "Selected file path: " + self.fcd.get_filename()
+            self.file_selected = self.fcd.get_filename()
+            log_content = "Selected file path: " + self.file_selected
             self.log_buffer(log_content)
             self.fcd.destroy()
         else:
