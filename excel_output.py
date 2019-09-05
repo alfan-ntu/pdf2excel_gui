@@ -38,4 +38,4 @@ def generate_excel(stripped_file_name, spread_sheet):
         row += 1
 
     workbook.close()
-    print("產出彙總稅單清單轉檔(.xslx):" + stripped_file_name + "xlsx")
+    # print("產出彙總稅單清單轉檔(.xslx):" + stripped_file_name + "xlsx")

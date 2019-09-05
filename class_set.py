@@ -29,7 +29,7 @@ class entry_setting:
         self.entry_combination = 0
 
     def set_current_entry(self, tax_bill_entry, decl_form_entry, tax_ID_entry, tax_amount_entry):
-#        pdb.set_trace()
+        #  pdb.set_trace()
         self.tax_bill_entry = tax_bill_entry          # bit 0 of entry_combination
         self.decl_form_entry = decl_form_entry        # bit 1 of entry_combination
         self.tax_ID_entry = tax_ID_entry              # bit 2 of entry_combination
@@ -38,39 +38,39 @@ class entry_setting:
 
         if self.tax_bill_entry is True:
             self.entry_combination = self.entry_combination | 1
-#            print("tax_bill_entry true & ec = ", self.entry_combination)
+            # print("tax_bill_entry true & ec = ", self.entry_combination)
         else:
             self.entry_combination = self.entry_combination & 14    # 0b1110
-#            print("tax_bill_entry false & ec = ", self.entry_combination)
+            # print("tax_bill_entry false & ec = ", self.entry_combination)
 
         if self.decl_form_entry is True:
             self.entry_combination = self.entry_combination | 2
-#            print("decl_form_entry true & ec = ", self.entry_combination)
+            # print("decl_form_entry true & ec = ", self.entry_combination)
         else:
             self.entry_combination = self.entry_combination & 13    # 0b1101
-#            print("decl_form_entry false & ec = ", self.entry_combination)
+            # print("decl_form_entry false & ec = ", self.entry_combination)
 
         if self.tax_ID_entry is True:
             self.entry_combination = self.entry_combination | 4
-#            print("tax_ID_entry true & ec = ", self.entry_combination)
+            # print("tax_ID_entry true & ec = ", self.entry_combination)
         else:
             self.entry_combination &= 11    # 0b1011
-#            print("tax_ID_entry false & ec = ", self.entry_combination)
+            # print("tax_ID_entry false & ec = ", self.entry_combination)
 
         if self.tax_amount_entry is True:
             self.entry_combination = self.entry_combination | 8
-#            print("tax_amount_entry true & ec = ", self.entry_combination)
+            # print("tax_amount_entry true & ec = ", self.entry_combination)
         else:
             self.entry_combination &= 7     # 0b0111
-#            print("tax_amount_entery false & ec = ", self.entry_combination)
+            # print("tax_amount_entery false & ec = ", self.entry_combination)
 
         if isPowerOfTwo(self.entry_combination) is True:
-#            print("<<<class_set.py>>>[true]self.entry_combination=",
-#                    self.entry_combination)
+            # print("<<<class_set.py>>>[true]self.entry_combination=",
+            # self.entry_combination)
             return True
         else:
-#            print("<<<class_set.py>>>[false]self.entry_combination=",
-#                    self.entry_combination)
+            # print("<<<class_set.py>>>[false]self.entry_combination=",
+            # self.entry_combination)
             return False
 
     def get_current_setting(self):
