@@ -87,5 +87,6 @@ class Pdf2Excel():
         buffer1.insert(end_iter, log_content + "\n")
 
 if __name__ == "__main__":
+    # create a new instance of Pdf2Excel()
     main = Pdf2Excel()
     Gtk.main()

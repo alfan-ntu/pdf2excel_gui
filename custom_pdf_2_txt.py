@@ -8,10 +8,14 @@ import pdfminer
 import pdfminer.high_level
 import pdfminer.layout
 import excel_output
+import pdf2excel_gui
 
 
 def pdf_2_txt(input_file):
-    print("pdf_2_txt receives a file named ", input_file)
+#    print("pdf_2_txt receives a file named ", input_file)
+#    pdf2excel_gui.Pdf2Excel.log_buffer("調用 pdf_2_txt")
+    p2e = pdf2excel_gui.Pdf2Excel()
+    p2e.log_buffer("調用 pdf_2_txt")
     # input_file = ""                 # pdf input file
     textoutput_file = ""            # text output file
     output_file = ""                # output csv file
@@ -34,29 +38,9 @@ def pdf_2_txt(input_file):
     decl_form_entry = False         # 報單資料輸入
     tax_ID_entry = False            # 統一編號輸入
     tax_amount_entry = False        # 報單金額輸入
-    #    es = class_set.entry_setting(tax_bill_entry, decl_form_entry, tax_ID_entry,
-    #                    tax_amount_entry)
+
     es = class_set.entry_setting(tax_bill_entry, decl_form_entry, tax_ID_entry, tax_amount_entry)
-    # handling arguments and options
-    # read input file name and output file name
-    """
-    try:
-        # getopt.getopt(args, shortopts, longopts=[])
-        opts, args = getopt.getopt(argv, "hi:o:t:", ["ifile=", "ofile=", "tfile="])
-    except getopt.GetoptError:
-        print("syntax: \n\tcustom_pdf_2_txt.py -i <inputfile> -t <textoutputfile> -o <outputfile>")
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print("syntax: \n\tcustom_pdf_2_txt.py -i <inputfile> -t <textoutputfile> -o <outputfile>")
-            sys.exit()
-        elif opt in ("-i", "--ifile"):      # input .pdf file
-            input_file = arg
-        elif opt in ("-o", "--ofile"):      # output .csv file
-            output_file = arg
-        elif opt in ("-t", "--tfile"):      # intermediate .txt file
-            textoutput_file = arg
-    """
+
     # printing input/output/textoutput files
     if input_file != "":
         print("輸入彙總稅單清單名稱(pdf):", input_file)
